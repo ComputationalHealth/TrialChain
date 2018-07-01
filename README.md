@@ -3,6 +3,7 @@
 TrialChain is a blockchain implementation to track and validate data assets captured for clinical research and clinical trials.
 
 To start with the framework:
+
 1. Clone the repository
 2. Make necessary configuration changes
   - Set the wallet addresses needed for private/public keys
