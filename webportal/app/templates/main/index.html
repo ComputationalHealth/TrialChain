@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <div class="row">
+    	<div class="col-md-12 main">
+        <h1 class="page-header">Dashboard</h1>
+    		<div class="row placeholders">
+    			<div class="col-sm-4 placeholder" id="geth-status">
+    				<h4>Initializing</h4>
+    			</div>
+    			<div class="col-sm-4 placeholder" id="balance">
+    				<h4>Initializing</h4>
+    			</div>
+    			<div class="col-sm-4 placeholder" id="cost">
+    				<h4>Initializing</h4>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+    <div class="col-md-12 multichainExplorer">
+      <object data="http://localhost:2750/" style="width: 100%; min-height: 568px">
+        <embed src="http://localhost:2750/"> </embed>
+        Error: Embedded data could not be displayed.
+      </object>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="{{ url_for('static', filename='jquery.min.js') }}><\/script>')</script>
+<script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+<script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+{% endblock %}

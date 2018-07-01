@@ -1,0 +1,90 @@
+version: '3'
+services:
+    multichain-master:
+      build: ../multichain
+      container_name: multichain-master
+      ports:
+        - "8570:8570"
+        - "8571:8571"
+      environment:
+        - CHAIN_NAME=trialchain
+        - CHAIN_RPC_IP=10.5.0.150
+        - CHAIN_RPC_NB_IP=10.5.0.152
+        - CHAIN_RPC_USER=rpcuser
+        - CHAIN_RPC_PASSWORD=trialchain1
+      networks:
+        vpcbr:
+          ipv4_address: 10.5.0.154
+
+    trialchain-geth:
+      build: ../geth
+      container_name: trialchain-geth
+      ports:
+        - "8545:8545"
+      environment:
+        - GETH_HOST=10.5.0.151
+        - GETH_RPC_PORT=8545
+      volumes:
+        - geth-data:/root/.ethereum
+      networks:
+        vpcbr:
+          ipv4_address: 10.5.0.151
+
+    multichain-notebook:
+      build: ../jupyter
+      container_name: multichain-notebook
+      ports:
+        - "8888:8888"
+      networks:
+        vpcbr:
+          ipv4_address: 10.5.0.152
+
+    db:
+      image: postgres
+      container_name: db
+      ports:
+        - "5432:5432"
+      volumes:
+        - "postgres-data:/var/lib/postgresql/data"
+      environment:
+        POSTGRES_USER: "webportal"
+        POSTGRES_PASSWORD: "testing"
+        POSTGRES_DB: "admin"
+      networks:
+        vpcbr:
+          ipv4_address: 10.5.0.153
+
+    webportal:
+      build: ../webportal
+      container_name: webportal
+      ports:
+        - "5000:5000"
+      links:
+        - db
+      environment:
+        DATABASE_URL: "postgres://webportal:testing@10.5.0.153:5432/admin"
+        CHAIN_NAME: "trialchain"
+        CHAIN_RPC_USER: "rpcuser"
+        CHAIN_RPC_PASSWORD: "trialchain1"
+        CHAIN_RPC_HOST: "multichain-master"
+        CHAIN_RPC_PORT: "8571"
+        ETH_KEY: "somekey"
+        ETH_ACCOUNT: "0x92B9FE281840D8298478Ce24900583FA49642Ed1"
+        GETH_URL: "http://trialchain-geth:8545"
+        ETHIO_TOKEN: "sometoken"
+        BCYPHER_TOKEN: "sometoken"
+        GETH_MODE: "light" # One of "fast", "light", "dev"
+      networks:
+        vpcbr:
+          ipv4_address: 10.5.0.150
+
+volumes:
+  geth-data:
+  postgres-data:
+
+networks:
+  vpcbr:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 10.5.0.0/24

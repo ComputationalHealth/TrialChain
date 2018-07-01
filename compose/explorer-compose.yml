@@ -1,0 +1,21 @@
+version: '3'
+services:
+    multichain-explorer:
+      build: ../multichain-explorer
+      environment:
+        - CHAIN_MASTER=10.5.0.154
+        - CHAIN_NAME=trialchain
+        - CHAIN_RPC_HOST=127.0.0.1
+        - CHAIN_RPC_IP=127.0.0.1
+        - CHAIN_RPC_PORT=8571
+        - CHAIN_RPC_USER=rpcuser
+        - CHAIN_RPC_PASSWORD=trialchain1
+      ports:
+        - "2750:2750"
+      networks:
+        - vpcbr
+
+networks:
+  vpcbr:
+    external:
+      name: tcmaster_vpcbr

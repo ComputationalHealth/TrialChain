@@ -1,0 +1,19 @@
+/*
+ * Main content
+ */
+
+dt {
+   margin: 5px;
+   float: left;
+   clear: both;
+   width: 7em;
+   font-weight: bold;
+}
+dt:after {
+   content: ":";
+}
+dd {
+   margin: 5px;
+   float: left;
+   width: 20em;
+}

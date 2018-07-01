@@ -1,0 +1,76 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block head %}
+{{ super() }}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+{% endblock %}
+
+{% block title %}
+	{% if title %}{{ title }} - TrialChain{% else %}Welcome to TrialChain{% endif %}
+{% endblock %}
+
+{% block navbar %}
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="{{ url_for('main.index') }}">TrialChain</a>
+			</div>
+			<div class="collapse navbar-collapse" id="navbar">
+				<ul class="nav navbar-nav">
+					<li><a href="{{ url_for('main.index') }}">Dashboard</a></li>
+					<li class="dropdown">
+		        <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          Admin <span class="caret"></span>
+		        </a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item" href="{{ url_for('main.nodes') }}">Add Node</a></li>
+							<li><a class="dropdown-item" href="{{ url_for('main.ethereum') }}">Validate TrialChain</a></li>
+							<li><a class="dropdown-item" href="{{ url_for('main.assets') }}">Check Asset</a></li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					{% if current_user.is_anonymous %}
+					<li><a href="{{ url_for('auth.login') }}">Login</a></li>
+					{% else %}
+					<li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+					{% endif %}
+				</ul>
+			</div>
+		</div>
+	</nav>
+{% endblock %}
+
+{% block content %}
+	<div class="container-fluid">
+		{% with messages = get_flashed_messages() %}
+    {% if messages %}
+			{% for message in messages %}
+			<div class="alert alert-info" role="alert">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+		{# application content needs to be provided in the app_content block #}
+		{% block app_content %}{% endblock %}
+  </div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="{{ url_for('static', filename='jquery.min.js') }}><\/script>')</script>
+<script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+{% endblock %}

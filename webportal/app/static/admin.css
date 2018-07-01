@@ -1,0 +1,9 @@
+/*
+ * Main content
+ */
+
+ hr {
+     display: block;
+     height: 3px;
+     background-color: Grey;
+ }

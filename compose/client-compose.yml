@@ -1,0 +1,35 @@
+version: '3'
+services:
+    multichain-client:
+      build: ../multichain
+      entrypoint: "./clientnode.sh"
+      environment:
+        - CHAIN_NAME=trialchain
+        - CHAIN_MASTER=10.5.0.154
+        - CHAIN_RPC_IP=10.5.0.155
+        - CHAIN_RPC_USER=rpcuser
+        - CHAIN_RPC_PASSWORD=trialchain1
+      networks:
+        - vpcbr
+
+    trialchain-service:
+      build: ../trialchain-service
+      container_name: trialchain-service
+      depends_on:
+        - "multichain-client"
+      ports:
+        - "9000:80"
+      environment:
+        - CHAIN_NAME=trialchain
+        - CHAIN_RPC_HOST=multichain-client
+        - CHAIN_RPC_USER=rpcuser
+        - CHAIN_RPC_PASSWORD=trialchain1
+        - CHAIN_RPC_PORT=8571
+      networks:
+        vpcbr:
+          ipv4_address: 10.5.0.155
+
+networks:
+  vpcbr:
+    external:
+      name: tcmaster_vpcbr

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block scripts %}
+{{ super() }}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="{{ url_for('static', filename='jquery.min.js') }}><\/script>')</script>
+<script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+<script src="{{ url_for('static', filename='results.js') }}"></script>
+{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='results.css') }}">
+{% endblock %}
+
+{% block app_content %}
+    <dl>
+      <dt>Asset MD5</dt>
+      <dd>{{data.asset}}</dd>
+      <dt>SHA256</dt>
+      <dd>{{data.sha256}}</dd>
+      <dt>TC TxID</dt>
+      <dd>{{data.issuetxid}}</dd>
+      <dt>Source</dt>
+      <dd>{{data.source}}</dd>
+      <dt>Issued</dt>
+      <dd>{{data.issued}}</dd>
+      <dt>Validated</dt>
+      <dd>{{data.validated}}</dd>
+      <dt>Eth Status</dt>
+      <dd>{{data.ethstatus}}</dd>
+      <dt>Confirmations</dt>
+      <dd>{{data.confirmations}}</dd>
+      <dt>Valid Block #</dt>
+      <dd>{{data.mchash}}</dd>
+      <dt>EthTx ID</dt>
+      <dd><a href="https://etherscan.io/tx/{{data.ethtxid}}" target="_blank">{{data.ethtxid}}</a></dd>
+    </dl>
+{% endblock %}

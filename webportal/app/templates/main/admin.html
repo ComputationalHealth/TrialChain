@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+{% endblock %}
+
+{% block app_content %}
+    <h2>{{ title }}</h2>
+		<div class="row">
+			<div class="col-md-4">
+				{{ wtf.quick_form(form) }}
+			</div>
+		</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="{{ url_for('static', filename='jquery.min.js') }}><\/script>')</script>
+<script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+{% endblock %}
