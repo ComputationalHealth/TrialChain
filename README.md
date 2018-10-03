@@ -2,6 +2,9 @@
 
 TrialChain is a blockchain implementation to track and validate data assets captured for clinical research and clinical trials.
 
+* Hao Dai, H Patrick Young, Thomas JS Durant, Guannan Gong, Mingming Kang, Harlan M Krumholz, Wade L Schulz: “TrialChain: A Blockchain-Based Platform to Validate Data Integrity in Large, Biomedical Research Studies”, 2018; [arXiv:1807.03662](http://arxiv.org/abs/1807.03662).
+
+
 To start with the framework:
 
 1. Clone the repository
