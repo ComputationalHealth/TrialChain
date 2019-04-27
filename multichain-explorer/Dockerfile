@@ -1,4 +1,4 @@
-FROM tcmaster_multichain-master
+FROM tc_master_multichain-master
 
 RUN apt-get -qqy update && apt-get -qqy install \
 	git \
