@@ -32,4 +32,4 @@ services:
 networks:
   vpcbr:
     external:
-      name: tcmaster_vpcbr
+      name: tc_master_vpcbr
