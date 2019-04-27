@@ -1,8 +1,6 @@
 FROM python:3.6.2
 MAINTAINER Wade Schulz <wade.schulz@gmail.com>
 
-RUN apt-get update -yyq
-
 RUN yes | pip install --upgrade pip
 RUN yes | pip install \
 		falcon \
