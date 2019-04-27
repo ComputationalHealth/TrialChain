@@ -10,7 +10,7 @@ RUN apt-get -qqy update && apt-get -qqy install \
 	wget
 
 RUN yes | pip install --upgrade pip
-RUN yes | pip install pycrypto
+RUN yes | pip install pycrypto py-ubjson
 
 RUN git clone https://github.com/MultiChain/multichain-explorer.git
 WORKDIR multichain-explorer
