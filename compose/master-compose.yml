@@ -21,7 +21,8 @@ services:
       container_name: trialchain-geth
       ports:
         - "8545:8545"
-        - "30303:30303"
+        - "30303:30303/tcp"
+        - "30303:30303/udp"
       environment:
         - GETH_HOST=10.5.0.151
         - GETH_RPC_PORT=8545
