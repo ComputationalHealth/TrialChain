@@ -54,7 +54,7 @@ scrypt==0.8.6
 six==1.11.0
 SQLAlchemy==1.2.0
 toolz==0.9.0
-urllib3==1.22
+urllib3==1.26.5
 visitor==0.1.3
 web3==4.2.0
 websockets==4.0.1
